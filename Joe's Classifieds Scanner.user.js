@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Joe's Backpack.tf Classifieds Scanner/Cacher
 // @namespace    https://joekiller.com
-// @version      1.0.1
+// @version      1.0.2
 // @description  Scans through backpack.tf classifieds pages with ctrl+leftarrow. When scanning stops a list is created sorted by listing date ascending. Ctrl + down arrow to force stop.
 // @author       Joseph Lawson
 // @match        *backpack.tf/classifieds*
@@ -128,12 +128,10 @@ function saveCookie(cname, cvalue) {
 }
 
 function run() {
-    let loc = location.href;
-    // snapshot every time (for science)
-    saveListings();
     // first time run
     if (searchState == -1) {
         setTimeout(function() {
+            // snapshot every time (for science)
             saveListings();
             if(!onLastPage()) {
                 openNextPage();

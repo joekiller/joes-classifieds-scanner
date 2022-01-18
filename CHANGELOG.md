@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.2
+
+Fixed:
+
+* Only snapshot when running
+
 ## 1.0.1
 
 Fixed:
