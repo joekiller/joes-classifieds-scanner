@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.3
+
+Fixed:
+
+* Meta for updates
+
 ## 1.0.2
 
 Fixed:
