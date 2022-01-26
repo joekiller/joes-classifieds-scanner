@@ -61,11 +61,11 @@ const sortFns = {
 
 const useAscending = true;
 
-const sortBy = 'price';
+const sortBy = 'originalId';
 const filters = {
-    'originalId': (entries) => entries.filter(entry => originalId <= Number.parseInt(entry['data']['data-original_id']))
+    'originalId': (entries) => entries.filter(entry => originalId <= Number.parseInt(entry['data']['data-original_id']) && "1095120776" !== entry['data']['data-listing_account_id'])
 }
-const filter = null; // or a key of filters ie 'originalId'
+const filter = 'originalId'; // or a key of filters ie 'originalId'
 const originalId = 3251762665;
 
 mergeEm()
