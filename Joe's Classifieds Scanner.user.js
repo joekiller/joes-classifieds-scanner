@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Joe's Backpack.tf Classifieds Scanner/Cacher
 // @namespace    https://joekiller.com
-// @version      1.0.3
+// @version      1.0.4
 // @description  Scans through backpack.tf classifieds pages with ctrl+leftarrow. When scanning stops a list is created sorted by listing date ascending. Ctrl + down arrow to force stop.
 // @author       Joseph Lawson
 // @match        *backpack.tf/classifieds*
@@ -9,6 +9,8 @@
 // @updateURL    https://github.com/joekiller/joes-classifieds-scanner/raw/main/Joe's%20Classifieds%20Scanner.meta.js
 // ==/UserScript==
 let searchDelay = 0;
+
+let dataExclusions = ['data-listing_name'];
 
 const programName = 'classifiedsCache';
 
@@ -50,7 +52,9 @@ function saveListings() {
         let entry = {};
         let attributes = thisItem.getAttributeNames();
         for (let j = 0; j < attributes.length; j++) {
-            entry[attributes[j]] = thisItem.getAttribute(attributes[j]);
+            if(!dataExclusions.contains(attributes)) {
+                entry[attributes[j]] = thisItem.getAttribute(attributes[j]);
+            }
         }
         entry['dateListed'] = thisListed.getAttribute('datetime');
         listingCache[listingId] = entry;

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.4
+
+Added:
+
+* dataExclusions for exclusing certain fields.
+
 ## 1.0.3
 
 Fixed:
