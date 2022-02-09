@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require("path");
-const Steam64 = "76561198118254940";
+const Steam64 = "76561197960265728";
 
 let paths;
 try {
@@ -17,30 +17,64 @@ try {
 const lookup = {};
 const keys = [];
 
-function findSum(first, second) {
-    if (first.length < second.length) {
-        return findSum(second, first)
+function findSum(str1, str2)
+{
+     
+    // Before proceeding further, make
+    // sure length of str2 is larger.
+    if (str1.length > str2.length)
+    {
+        let t = str1;
+        str1 = str2;
+        str2 = t;
     }
-	var sum = '';
-	var carry = 0;
-	var diff = second.length - first.length;
-	for (i = first.length - 1; i >= 0; i--) {
-		var temp =
-			(Number(first.charAt(i)) % 10) +
-			(Number(second.charAt(i + diff)) % 10) +
-			carry;
-		if (temp >= 10) {
-			sum = (temp % 10) + sum;
-			carry = Math.floor(temp / 10);
-		} else {
-			sum = temp + sum;
-			carry = 0;
-		}
-	}
-	if (carry) {
-		sum = carry + sum;
-	}
-	return sum;
+     
+    // Take an empty String for storing result
+    let str = "";
+     
+    // Calculate length of both String
+    let n1 = str1.length, n2 = str2.length;
+     
+    // Reverse both of Strings
+    str1 = str1.split("").reverse().join("");
+    str2 = str2.split("").reverse().join("");
+     
+    let carry = 0;
+    for(let i = 0; i < n1; i++)
+    {
+         
+        // Do school mathematics, compute sum of
+        // current digits and carry
+        let sum = ((str1[i].charCodeAt(0) -
+                        '0'.charCodeAt(0)) +
+                   (str2[i].charCodeAt(0) -
+                        '0'.charCodeAt(0)) + carry);
+        str += String.fromCharCode(sum % 10 +
+                        '0'.charCodeAt(0));
+     
+        // Calculate carry for next step
+        carry = Math.floor(sum / 10);
+    }
+     
+    // Add remaining digits of larger number
+    for(let i = n1; i < n2; i++)
+    {
+        let sum = ((str2[i].charCodeAt(0) -
+                        '0'.charCodeAt(0)) + carry);
+        str += String.fromCharCode(sum % 10 +
+                        '0'.charCodeAt(0));
+        carry = Math.floor(sum / 10);
+    }
+     
+    // Add remaining carry
+    if (carry > 0)
+        str += String.fromCharCode(carry +
+                       '0'.charCodeAt(0));
+     
+    // reverse resultant String
+    str = str.split("").reverse().join("");
+     
+    return str;
 }
 
 
